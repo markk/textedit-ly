@@ -1,0 +1,26 @@
+# Textedit url handling for LilyPond in Gnome
+
+## Install
+
+1. Put the file `textedit-url.sh` somewhere in your `$PATH` and make it executable.
+
+1. Put the file `textedit.desktop` in `$HOME/.local/share/applications/`
+
+1. Edit `$HOME/.local/share/applications/mimeapps.list`, adding the line
+
+    x-scheme-handler/textedit=textedit.desktop;
+
+   to the section `[Added Associations]`.
+
+## Testing
+
+1. `tail -f ~/textedit_url.log`
+
+1. Open a LilyPond-produced pdf in Evince.
+
+1. Click a notehead.
+
+## Todo
+
+- add configurable support for other editors
+
