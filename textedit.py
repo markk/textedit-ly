@@ -53,7 +53,7 @@ def getconfig():
         config.add_section("editor")
         config.set("editor", "editor", "gvim")
         config.set("editor", "command",
-                "--remote +:{line}:normal{startchar} \"{file}\"")
+                "--remote +:{line}:normal{start} \"{file}\"")
         with open(configfilename, "w") as configfile:
             config.write(configfile)
     if not config.has_section("script"):
