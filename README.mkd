@@ -46,6 +46,19 @@ command option:
 
 These are taken from the url embedded in the LilyPond pdf.
 
+## Notes
+
+On Ubuntu, AppArmor may prevent Evince from opening external links. In that
+case:
+
+    $ sudo ln -s /etc/apparmor.d/usr.bin.evince /etc/apparmor.d/disable/usr.bin.evince
+    $ sudo service apparmor restart
+
+See [here][1] for further details. Thanks to Rutger Hofman on the lilypond-user
+list.
+
+[1]: http://xubuntugeek.blogspot.nl/2012/05/fix-evince-is-unable-to-open-external.html
+
 ## TODO
 
 - send to correct vim instance - is there a way to discover if the file is open
