@@ -5,7 +5,18 @@ import sys
 import os
 import subprocess
 import shlex
+import io
 from ConfigParser import ConfigParser
+
+defaults = """
+[editor]
+editor = gvim
+command = --remote +:{line}:normal{start} "{file}"
+
+[script]
+verbose = true
+focus = false
+"""
 
 def parseurl(url):
     if ":" not in url:
@@ -46,21 +57,11 @@ def invokeeditor(fileposition, config, logfile):
 
 def getconfig():
     config = ConfigParser()
+    config.readfp(io.BytesIO(defaults))
     configfilename = os.path.expanduser("~/.lytextedit.cfg")
-    config.read(configfilename)
-    if not config.has_section("editor"):
+    filesread = config.read(configfilename)
+    if configfilename not in filesread:
         # write default config
-        config.add_section("editor")
-        config.set("editor", "editor", "gvim")
-        config.set("editor", "command",
-                "--remote +:{line}:normal{start} \"{file}\"")
-        with open(configfilename, "w") as configfile:
-            config.write(configfile)
-    if not config.has_section("script"):
-        # write default config
-        config.add_section("script")
-        config.set("script", "verbose", "true")
-        config.set("script", "focus", "false")
         with open(configfilename, "w") as configfile:
             config.write(configfile)
     return config

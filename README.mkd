@@ -22,7 +22,7 @@
 
 The default configuration file will be created on first run if it doesn't exist.
 
-```config
+```bash
 [editor]
 # executable name
 editor = gvim
@@ -46,6 +46,9 @@ command option:
 
 These are taken from the url embedded in the LilyPond pdf.
 
+Once everything is working properly, you can edit `~/.lytextedit.cfg`, changing
+`verbose = false`.
+
 ## Notes
 
 On Ubuntu, AppArmor may prevent Evince from opening external links. In that
@@ -63,4 +66,4 @@ list.
 
 - send to correct vim instance - is there a way to discover if the file is open
   in which server?
-
+- do default config better config = ConfigParser(defaults)
