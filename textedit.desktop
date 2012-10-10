@@ -4,4 +4,4 @@ Name=Textedit Url Handler
 Comment=Handle textedit:// links
 Version=1.0
 Type=Application
-Exec=textedit-url.sh %u
+Exec=textedit.py %u

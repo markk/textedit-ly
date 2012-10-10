@@ -2,25 +2,52 @@
 
 ## Install
 
-1. Put the file `textedit-url.sh` somewhere in your `$PATH` and make it executable.
+1. Put the file `textedit.py` somewhere in your `$PATH` and make it executable.
 
 1. Put the file `textedit.desktop` in `$HOME/.local/share/applications/`
 
 1. Edit `$HOME/.local/share/applications/mimeapps.list`, adding the line
-
-    x-scheme-handler/textedit=textedit.desktop;
-
+   `x-scheme-handler/textedit=textedit.desktop;`
    to the section `[Added Associations]`.
 
 ## Testing
 
-1. `tail -f ~/textedit_url.log`
+1. `touch ~/.lytextedit.log && tail -f ~/.lytextedit.log`
 
 1. Open a LilyPond-produced pdf in Evince.
 
 1. Click a notehead.
 
-## Todo
+## Configuration
 
-- add configurable support for other editors
+The default configuration file will be created on first run if it doesn't exist.
+
+```config
+[editor]
+# executable name
+editor = gvim
+# command to pass to editor
+command = --remote +:{line}:normal{start} "{file}"
+
+[script]
+# lots of info to the log file
+verbose = true
+# runs xdotool to focus the editor window
+focus = false
+```
+
+This can be edited to launch your preferred editor. Fields available for the
+command option:
+
+    - file
+    - line
+    - start
+    - end
+
+These are taken from the url embedded in the LilyPond pdf.
+
+## TODO
+
+- send to correct vim instance - is there a way to discover if the file is open
+  in which server?
 
