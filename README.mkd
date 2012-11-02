@@ -66,4 +66,4 @@ list.
 
 - send to correct vim instance - is there a way to discover if the file is open
   in which server?
-- do default config better config = ConfigParser(defaults)
+- install properly with xdg-{mime,desktop-menu}
