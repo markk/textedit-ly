@@ -6,6 +6,7 @@ import os
 import subprocess
 import shlex
 import io
+import urllib2
 from ConfigParser import ConfigParser
 
 defaults = """
@@ -30,6 +31,7 @@ def parseurl(url):
             "start": int(parts[3]),
             "end":   int(parts[4])
             }
+    fileposition["file"] = urllib2.unquote(fileposition["file"]).decode("utf8")
     fileposition["exists"] = os.path.isfile(fileposition["file"])
     return fileposition
 

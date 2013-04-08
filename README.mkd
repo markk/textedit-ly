@@ -1,4 +1,12 @@
-# Textedit url handling for LilyPond in Gnome
+# Textedit url handling for GNU LilyPond in Gnome
+
+These files and documentation are to aid in making point-and-click urls embedded in PDF files produced by GNU LilyPond more useable in Gnome. The script `textedit.py` differs in functionality only slightly from `lilypond-invoke-editor` which is distributed with LilyPond:
+
+- it places the cursor at the character number in the url, rather than one character to the left;
+
+- it focusses the editor window --- for this functionality, `xdotool` should be installed.
+
+See notes below for using `lilypond-invoke-editor` with Emacs.
 
 ## Install
 
@@ -36,8 +44,7 @@ verbose = true
 focus = false
 ```
 
-This can be edited to launch your preferred editor. Fields available for the
-command option:
+This can be edited to launch your preferred editor. Fields available for the command option:
 
     - file
     - line
@@ -46,24 +53,60 @@ command option:
 
 These are taken from the url embedded in the LilyPond pdf.
 
-Once everything is working properly, you can edit `~/.lytextedit.cfg`, changing
-`verbose = false`.
+Example for using gedit:
+
+```bash
+[editor]
+editor = gedit
+command = "{file}" +{line}:{start}
+```
+
+Once everything is working properly, you can edit `~/.lytextedit.cfg`, changing `verbose = false`.
 
 ## Notes
 
-On Ubuntu, AppArmor may prevent Evince from opening external links. In that
-case:
+On Ubuntu, AppArmor may prevent Evince from opening external links. In that case:
 
     $ sudo ln -s /etc/apparmor.d/usr.bin.evince /etc/apparmor.d/disable/usr.bin.evince
     $ sudo service apparmor restart
 
-See [here][1] for further details. Thanks to Rutger Hofman on the lilypond-user
-list.
+See [here][1] for further details. Thanks to Rutger Hofman on the lilypond-user list.
 
 [1]: http://xubuntugeek.blogspot.nl/2012/05/fix-evince-is-unable-to-open-external.html
 
+## Using with GNU Emacs in lilypond-mode
+
+1. Put `textedit.desktop` into $HOME/.local/share/applications and edit `mimeapps.list` as described above.
+
+2. Edit `textedit.desktop`, changing the line
+       ```Exec=textedit.py %u```
+   to
+       ```Exec=lilypond-invoke-editor %u```
+
+3. Create a file `lilypond-view-pdf` somewhere in your `$PATH` and make it executable, with the following content:
+
+```bash
+#!/bin/sh
+evince $1 &
+```
+
+   Example:
+
+        $ cd /usr/local/bin/
+        $ sudo echo -e '#!/bin/sh\nevince $1 &\n' > lilypond-view-pdf
+        $ sudo chmod a+x lilypond-view-pdf
+
+4. Open Emacs.
+
+   - Open a lilypond source file to automatically load lilypond-mode.
+   - Issue the command `M-x customize-group`
+   - On the prompt enter `LilyPond` and press return.
+   - On the LilyPond customization group page scroll down to the entry `Lilypond Pdf Command`.
+   - Enter `lilypond-view-pdf` in the edit field, click on the "State" button below "Lilypond Pdf Command" and select "Set for Current Session" and "Save for Future Sessions".
+
+Thanks to Orm Finnendahl on the lilypond-user list for these instructions.
+
 ## TODO
 
-- send to correct vim instance - is there a way to discover if the file is open
-  in which server?
+- send to correct [g]vim instance - is there a way to discover if the file is open in which server?
 - install properly with xdg-{mime,desktop-menu}
