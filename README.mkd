@@ -12,11 +12,12 @@ See notes below for using `lilypond-invoke-editor` with Emacs.
 
 1. Put the file `textedit.py` somewhere in your `$PATH` and make it executable.
 
-1. Put the file `textedit.desktop` in `$HOME/.local/share/applications/`
+1. Install the desktop file by running
 
-1. Edit `$HOME/.local/share/applications/mimeapps.list`, adding the line
-   `x-scheme-handler/textedit=textedit.desktop;`
-   to the section `[Added Associations]`.
+```bash
+xdg-desktop-menu install ./textedit.desktop
+xdg-mime default ltextedit.desktop x-scheme-handler/textedit
+```
 
 ## Testing
 
