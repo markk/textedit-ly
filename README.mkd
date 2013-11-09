@@ -110,4 +110,3 @@ Thanks to Orm Finnendahl on the lilypond-user list for these instructions.
 ## TODO
 
 - send to correct [g]vim instance - is there a way to discover if the file is open in which server?
-- install properly with xdg-{mime,desktop-menu}
