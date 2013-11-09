@@ -16,7 +16,7 @@ See notes below for using `lilypond-invoke-editor` with Emacs.
 
 ```bash
 xdg-desktop-menu install ./textedit.desktop
-xdg-mime default ltextedit.desktop x-scheme-handler/textedit
+xdg-mime default textedit.desktop x-scheme-handler/textedit
 ```
 
 ## Testing
