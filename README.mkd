@@ -15,7 +15,7 @@ See notes below for using `lilypond-invoke-editor` with Emacs.
 1. Install the desktop file by running
 
 ```bash
-xdg-desktop-menu install ./textedit.desktop
+xdg-desktop-menu install --novendor ./textedit.desktop
 xdg-mime default textedit.desktop x-scheme-handler/textedit
 ```
 
