@@ -1,7 +1,8 @@
 
 [Desktop Entry]
-Name=Textedit Url Handler
+Name=Textedit url handler
 Comment=Handle textedit:// links
 Version=1.0
 Type=Application
-Exec=textedit.py %u
+Exec=%%BINPATH%%/textedit.py %u
+MimeType=x-scheme-handler/textedit;

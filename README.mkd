@@ -10,18 +10,15 @@ See notes below for using `lilypond-invoke-editor` with Emacs.
 
 ## Install
 
-1. Put the file `textedit.py` somewhere in your `$PATH` and make it executable.
-
-1. Install the desktop file by running
+The install script places `textedit.py` in `~/.local/bin` by default, to override this, supply an alternative directory as the argument.
 
 ```bash
-xdg-desktop-menu install --novendor ./textedit.desktop
-xdg-mime default textedit.desktop x-scheme-handler/textedit
+./install.sh [/optional/path/to/script]
 ```
 
 ## Testing
 
-1. `touch ~/.lytextedit.log && tail -f ~/.lytextedit.log`
+1. `touch /tmp/lytextedit.log && tail -f /tmp/lytextedit.log`
 
 1. Open a LilyPond-produced pdf in Evince.
 
@@ -29,7 +26,7 @@ xdg-mime default textedit.desktop x-scheme-handler/textedit
 
 ## Configuration
 
-The default configuration file will be created on first run if it doesn't exist.
+The default configuration file will be created on install if it doesn't exist.
 
 ```bash
 [editor]
@@ -62,7 +59,7 @@ editor = gedit
 command = "{file}" +{line}:{start}
 ```
 
-Once everything is working properly, you can edit `~/.lytextedit.cfg`, changing `verbose = false`.
+Once everything is working properly, you can edit `~/.config/lytextedit.cfg`, changing `verbose = false`.
 
 ## Notes
 

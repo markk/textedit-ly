@@ -60,7 +60,7 @@ def invokeeditor(fileposition, config, logfile):
 def getconfig():
     config = ConfigParser()
     config.readfp(io.BytesIO(defaults))
-    configfilename = os.path.expanduser("~/.lytextedit.cfg")
+    configfilename = os.path.expanduser("~/.config/lytextedit.cfg")
     filesread = config.read(configfilename)
     if configfilename not in filesread:
         # write default config
@@ -76,7 +76,7 @@ if __name__ == "__main__":
         url = None
     config = getconfig()
     if config.getboolean("script", "verbose"):
-        logfile = open(os.path.expanduser("~/.lytextedit.log"), "w")
+        logfile = open("/tmp/lytextedit.log", "a")
         logfile.write("configuration read...\n")
     else:
         logfile = False
