@@ -6,3 +6,4 @@ Version=1.0
 Type=Application
 Exec=%%BINPATH%%/textedit.py %u
 MimeType=x-scheme-handler/textedit;
+NoDisplay=true
