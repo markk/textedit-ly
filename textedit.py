@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
 import sys
@@ -6,8 +6,8 @@ import os
 import subprocess
 import shlex
 import io
-import urllib2
-from ConfigParser import ConfigParser
+import urllib.parse
+from configparser import ConfigParser
 
 defaults = """
 [editor]
@@ -21,17 +21,17 @@ focus = false
 
 def parseurl(url):
     if ":" not in url:
-        raise ValueError, "Could not parse url {0}".format(url)
+        raise ValueError("Could not parse url {0}".format(url))
     parts = url.split(":")
     if len(parts) != 5:
-        raise ValueError, "Could not parse url {0}".format(url)
+        raise ValueError("Could not parse url {0}".format(url))
     fileposition = {
             "file":  parts[1].replace("///", "/"),
             "line":  int(parts[2]),
             "start": int(parts[3]),
             "end":   int(parts[4])
             }
-    fileposition["file"] = urllib2.unquote(fileposition["file"]).decode("utf8")
+    fileposition["file"] = urllib.parse.unquote(fileposition["file"])
     fileposition["exists"] = os.path.isfile(fileposition["file"])
     return fileposition
 
@@ -59,7 +59,7 @@ def invokeeditor(fileposition, config, logfile):
 
 def getconfig():
     config = ConfigParser()
-    config.readfp(io.BytesIO(defaults))
+    config.read_string(defaults)
     configfilename = os.path.expanduser("~/.config/lytextedit.cfg")
     filesread = config.read(configfilename)
     if configfilename not in filesread:
